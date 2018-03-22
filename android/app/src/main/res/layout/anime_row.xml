@@ -4,6 +4,7 @@
     android:layout_height="150dp"
     android:layout_marginTop="10dp"
     android:padding="8dp"
+    android:id="@+id/container"
     >
     
     <ImageView

@@ -20,7 +20,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private  final  String res="http://192.168.1.4:4000/details";
+    private  final  String res="http://192.168.1.5:4000/details";
     private JsonArrayRequest request;
     private RequestQueue requestQueue;
     private List<Anime> lstanime;

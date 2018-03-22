@@ -1,11 +1,13 @@
 package com.nimkraft.myreview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -36,7 +38,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View view;
         LayoutInflater inflater=LayoutInflater.from(mctx);
         view=inflater.inflate(R.layout.anime_row,parent,false);
-        return new MyViewHolder(view);
+
+        final MyViewHolder myViewHolder =new MyViewHolder(view);
+
+        myViewHolder.view_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(mctx,AnimeActivity.class);
+                i.putExtra("anime_name",mdata.get(myViewHolder.getAdapterPosition()).getName());
+                i.putExtra("anime_description",mdata.get(myViewHolder.getAdapterPosition()).getDescription());
+                i.putExtra("anime_rating",mdata.get(myViewHolder.getAdapterPosition()).getRating());
+                i.putExtra("anime_catagory",mdata.get(myViewHolder.getAdapterPosition()).getCatagorie());
+                i.putExtra("anime_episode",mdata.get(myViewHolder.getAdapterPosition()).getEpisode());
+                i.putExtra("anime_img",mdata.get(myViewHolder.getAdapterPosition()).getImg_url());
+
+                mctx.startActivity(i);
+            }
+        });
+
+        return myViewHolder;
     }
 
     @Override
@@ -62,10 +82,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView tv_description;
         TextView tv_categorie;
         ImageView tv_thumbnail;
+        LinearLayout view_container;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
+            view_container=itemView.findViewById(R.id.container);
             tv_name=itemView.findViewById(R.id.anime_title);
             tv_rating=itemView.findViewById(R.id.anime_rating);
             tv_categorie=itemView.findViewById(R.id.anime_categorie);
